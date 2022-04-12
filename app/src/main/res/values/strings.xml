@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">WorldWide</string>
+    <string name="IniciarSesion">Inicia sesión o registrate</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="btnIniciarSesion">Iniciar Sesión</string>
+    <string name="btnIniciarGoogle">Google</string>
+    <string name="correoElectronico">Correo electronico</string>
+    <string name="btnRegistro">Registrarse</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="buttonRegistrar">Registrarse</string>
+    <string name="buttonBuscarDestino">Buscar destino</string>
+    <string name="LugarRecomendado">Lugares recomendados</string>
+    <string name="btnRecomendar1">Lugar</string>
+    <string name="btnRecomendar2">Lugar2</string>
+    <string name="btnRecomendar3">Lugar3</string>
+    <string name="btnRecomendar4">Lugar4</string>
+    <string name="textEligeContinente">Elige el continente:</string>
+    <string name="btnRegistrarse">Registrarse</string>
+    <string name="buttonAfrica">África</string>
+    <string name="buttonAmerica">América</string>
+    <string name="buttonAsia">Asia</string>
+    <string name="buttonEuropa">Europa</string>
+    <string name="buttonOceania">Oceanía</string>
+    <string name="textviewElige">Elige el continente:</string>
+
 </resources>

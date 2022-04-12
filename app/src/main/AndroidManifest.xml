@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eyder.worldwide">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorldWide">
+        <activity
+            android:name=".vistas.ContinenteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.RegistroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.IniciarSesionRegistroActivity"
+            android:exported="false" />
         <activity
             android:name=".vistas.MainActivity"
             android:exported="true">

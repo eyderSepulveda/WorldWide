@@ -29,7 +29,8 @@ android {
 }
 
 dependencies {
-
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')//Implem para autenticar con usuario y contraseña
+    implementation 'com.google.firebase:firebase-auth' //Implem para autenticar con usuario y contraseña
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vistas.HomeActivity">
+
+    <Button
+        android:id="@+id/btnBuscarDestino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonBuscarDestino"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.122" />
+
+    <TextView
+        android:id="@+id/textViewRecomendado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/LugarRecomendado"
+        app:layout_constraintStart_toStartOf="@+id/btnBuscarDestino"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscarDestino" />
+
+    <Button
+        android:id="@+id/btnRecomendado1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/btnRecomendar1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecomendado"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <Button
+        android:id="@+id/btnRecomendado2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:text="@string/btnRecomendar2"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRecomendado1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnRecomendado1" />
+
+    <Button
+        android:id="@+id/btnRecomendado3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/btnRecomendar3"
+        app:layout_constraintEnd_toEndOf="@+id/btnRecomendado1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRecomendado1" />
+
+    <Button
+        android:id="@+id/btnRecomendado4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:text="@string/btnRecomendar4"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRecomendado3"
+        app:layout_constraintEnd_toEndOf="@+id/btnRecomendado2"
+        app:layout_constraintStart_toEndOf="@+id/btnRecomendado3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
