@@ -1,9 +1,13 @@
 package com.eyder.worldwide.vistas;
 
+import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +16,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.eyder.worldwide.R;
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.BeginSignInResult;
+import com.google.android.gms.auth.api.identity.GetSignInIntentRequest;
+import com.google.android.gms.auth.api.identity.Identity;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +41,11 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText correo, contrasena;
     private Button iniciarSesion, registro;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient gsc;
+    private int requestCode = 100;
+    private Task<GoogleSignInAccount> task;
+    private SignInButton btnGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +57,19 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         contrasena = findViewById(R.id.editTextTextContrasena);
         iniciarSesion = findViewById(R.id.iniciarSesionBtn);
         registro = findViewById(R.id.btnRegistro);
+        btnGoogle = findViewById(R.id.signGoogle);
         iniciarSesion.setOnClickListener(view -> iniciarSesion(correo.getText().toString(), contrasena.getText().toString()));
         registro.setOnClickListener(view -> irRegistrarse1());
 
+
+
+         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
+
+        btnGoogle.setOnClickListener(view -> signIn());
     }
 
     @Override
@@ -45,7 +77,8 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(currentUser != null || account != null){
             reload();
         }
     }
@@ -85,4 +118,34 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         Intent i = new Intent(this, RegistroActivity.class);
         startActivity(i);
     }
+
+
+
+    private void signIn() {
+        Intent signInIntent = gsc.getSignInIntent();
+
+       // startActivityForResult(signInIntent, requestCode);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == 100) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                task.getResult(ApiException.class);
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(i);
+            }catch (ApiException e){
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 }

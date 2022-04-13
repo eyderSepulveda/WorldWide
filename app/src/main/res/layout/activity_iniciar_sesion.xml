@@ -45,11 +45,17 @@
             android:layout_height="wrap_content"
             android:text="@string/btnIniciarSesion" />
 
-        <Button
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <!--<Button
             android:id="@+id/btnIniciarGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnIniciarGoogle" />
+            android:text="@string/btnIniciarGoogle" />-->
 
         <Button
             android:id="@+id/btnRegistro"

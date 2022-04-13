@@ -33,6 +33,7 @@ public class ContinenteActivity extends AppCompatActivity {
         btnAsia.setOnClickListener(view -> irTipoTurismo());
 
         btnEuropa.setOnClickListener(view -> irTipoTurismo());
+
         btnOceania.setOnClickListener(view -> irTipoTurismo());
     }
 
