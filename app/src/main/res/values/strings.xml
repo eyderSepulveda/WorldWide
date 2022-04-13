@@ -23,5 +23,14 @@
     <string name="buttonEuropa">Europa</string>
     <string name="buttonOceania">Oceanía</string>
     <string name="textviewElige">Elige el continente:</string>
+    <string name="textviewTipoTurismo">Tipo de turismo</string>
+    <string name="checkbox">CheckBox</string>
+    <string name="string_checkbox" />
+    <string name="string_string_checkbox" />
+    <string name="checkboxCultural">Cultural</string>
+    <string name="checkboxGastronomico">Gastronómico</string>
+    <string name="checkboxNaturalez">Naturaleza</string>
+    <string name="checkboxSolPlaya">Sol y playa</string>
+    <string name="buttonBuscarTur">Buscar</string>
 
 </resources>

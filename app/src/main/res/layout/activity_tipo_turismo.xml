@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vistas.TipoTurismoActivity">
+
+    <TextView
+        android:id="@+id/textTipoTurismo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textviewTipoTurismo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.191" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTCultural"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/checkboxCultural"
+        app:layout_constraintStart_toStartOf="@+id/textTipoTurismo"
+        app:layout_constraintTop_toBottomOf="@+id/textTipoTurismo" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTGastronomico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/checkboxGastronomico"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxTCultural"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTCultural" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTNaturaleza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/checkboxNaturalez"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxTGastronomico"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTGastronomico" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTSolPlaya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/checkboxSolPlaya"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxTNaturaleza"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTNaturaleza" />
+
+    <Button
+        android:id="@+id/btnBuscarTur"
+        android:layout_width="203dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/buttonBuscarTur"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxTSolPlaya"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTSolPlaya" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

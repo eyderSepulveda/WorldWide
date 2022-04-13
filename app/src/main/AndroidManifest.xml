@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorldWide">
         <activity
+            android:name=".vistas.TipoTurismoActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.ContinenteActivity"
             android:exported="false" />
         <activity
