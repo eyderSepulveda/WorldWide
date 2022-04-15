@@ -26,19 +26,22 @@ public class ContinenteActivity extends AppCompatActivity {
         btnEuropa = findViewById(R.id.btnEuropa);
         btnOceania = findViewById(R.id.btnOceania);
 
-        btnAfrica.setOnClickListener(view -> irTipoTurismo());
+        btnAfrica.setOnClickListener(view -> irTipoTurismo("africa"));
 
-        btnAmerica.setOnClickListener(view -> irTipoTurismo());
+        btnAmerica.setOnClickListener(view -> irTipoTurismo("america"));
 
-        btnAsia.setOnClickListener(view -> irTipoTurismo());
+        btnAsia.setOnClickListener(view -> irTipoTurismo("asia"));
 
-        btnEuropa.setOnClickListener(view -> irTipoTurismo());
+        btnEuropa.setOnClickListener(view -> irTipoTurismo("europa"));
 
-        btnOceania.setOnClickListener(view -> irTipoTurismo());
+        btnOceania.setOnClickListener(view -> irTipoTurismo("oceania"));
     }
 
-    private void irTipoTurismo(){
+    private void irTipoTurismo(String continente){
+        Bundle continentes = new Bundle();
+        continentes.putString("continente", continente);
         Intent i = new Intent(this, TipoTurismoActivity.class);
+        i.putExtras(continentes);
         startActivity(i);
     }
 

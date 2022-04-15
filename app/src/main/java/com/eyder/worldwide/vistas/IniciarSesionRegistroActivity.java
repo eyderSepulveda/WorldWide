@@ -1,5 +1,8 @@
 package com.eyder.worldwide.vistas;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -8,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,11 +45,13 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText correo, contrasena;
     private Button iniciarSesion, registro;
-    private GoogleSignInOptions gso;
-    private GoogleSignInClient gsc;
     private int requestCode = 100;
     private Task<GoogleSignInAccount> task;
     private SignInButton btnGoogle;
+
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient gsc;
+    private GoogleSignInAccount gAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,25 +67,48 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         iniciarSesion.setOnClickListener(view -> iniciarSesion(correo.getText().toString(), contrasena.getText().toString()));
         registro.setOnClickListener(view -> irRegistrarse1());
 
-
-
-         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*LOGUEAR GOOGLE*/
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
         gsc = GoogleSignIn.getClient(this, gso);
+        gAccount=GoogleSignIn.getLastSignedInAccount(this); //Obtiene el ultimo login google
 
-        btnGoogle.setOnClickListener(view -> signIn());
+        //Valida si el usuario ya se ha logueado
+        if(gAccount!=null){
+            //Abre la pagina inicial
+            Log.d(TAG,"USUARIO YA LOGUEADO ANTERIORMENTE");
+            Log.d(TAG, "fullName: "+gAccount.getDisplayName());
+            Log.d(TAG, "Email: "+gAccount.getEmail());
+            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+        //Captura la respuesta del inicio sesion google
+        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Log.d(TAG, "INICIO: "+result.getResultCode());
+                    //Obtieniendo una cuenta despues que el usuario selecione una cuenta del dialogo de cuentas de google
+                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+                    manejarGoogleLogueo(task);
+                });
+
+        btnGoogle.setOnClickListener(view -> {
+            Intent signInGoogle=gsc.getSignInIntent();
+            someActivityResultLauncher.launch(signInGoogle);
+        });
+
+
+
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(currentUser != null || account != null){
-            reload();
+        if(mAuth.getCurrentUser() != null){
+            updateUI(mAuth.getCurrentUser());
         }
     }
 
@@ -120,31 +149,24 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     }
 
 
-
-    private void signIn() {
-        Intent signInIntent = gsc.getSignInIntent();
-
-       // startActivityForResult(signInIntent, requestCode);
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == 100) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                task.getResult(ApiException.class);
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(i);
-            }catch (ApiException e){
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-            }
+    private void manejarGoogleLogueo(Task<GoogleSignInAccount> task){
+        try {
+            GoogleSignInAccount account=task.getResult(ApiException.class);
+            //Se obtienen datos de cuenta
+            final String getFullName= account.getDisplayName();
+            final String email=account.getEmail();
+            final Uri photoUrl=account.getPhotoUrl();
+            Log.d(TAG, "fullName: "+getFullName);
+            Log.d(TAG, "Email: "+email);
+            //Iniciar Home
+            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(i);
+            finish();
+        } catch (ApiException e) {
+            e.printStackTrace();
+            Toast.makeText(this,"No ha sido posible iniciar sesión so tu cuenta Google",Toast.LENGTH_SHORT).show();
         }
+
     }
 
 

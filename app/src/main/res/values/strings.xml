@@ -33,5 +33,6 @@
     <string name="checkboxSolPlaya">Sol y playa</string>
     <string name="buttonBuscarTur">Buscar</string>
     <string name="textviewResultadoLugar">Lugares recomendados</string>
+    <string name="buttonCerrarSesion">Cerrar sesión</string>
 
 </resources>
