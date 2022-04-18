@@ -61,24 +61,15 @@ public class TipoTurismoActivity extends AppCompatActivity {
         String stringNaturaleza =  (naturaleza.isChecked() ? "naturaleza" : "No");
         String stringGastronomico =  (gastronomico.isChecked() ? "gastronomico" : "No");
         String stringCultural =  (cultural.isChecked() ? "cultural" : "No");
+        Bundle continentes = new Bundle();
+        continentes.putString("continente", continente);
 
-
-        db.collection("Lugares").whereEqualTo("continente", continente).
-                whereArrayContainsAny("tipoTurismo", Arrays.asList(stringSol, stringNaturaleza, stringCultural, stringGastronomico))
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        int con = 0;
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d(TAG, document.getId() + " => " + document.getData());
-                            con ++;
-                        }
-                        Log.d(TAG, "Se encontraron " + con +" lugares");
-                    } else {
-                        Log.w(TAG, "Error getting documents.", task.getException());
-                    }
-                });
         Intent i = new Intent(this, ResultadoLugarActivity.class);
+        i.putExtras(continentes);
+        i.putExtra("sol", stringSol);
+        i.putExtra("naturaleza", stringNaturaleza);
+        i.putExtra("cultural", stringCultural);
+        i.putExtra("gastronomico", stringGastronomico);
         startActivity(i);
         finish();
     }
