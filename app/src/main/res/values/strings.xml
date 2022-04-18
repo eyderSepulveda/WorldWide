@@ -34,5 +34,9 @@
     <string name="buttonBuscarTur">Buscar</string>
     <string name="textviewResultadoLugar">Lugares recomendados</string>
     <string name="buttonCerrarSesion">Cerrar sesión</string>
+    <string name="textImagenInicio">Encuentra el destino ideal para tu proximo viaje</string>
+    <string name="imgInicio">inicio</string>
+    <string name="icono">icono</string>
+    <string name="textviewnombreApp">WorldWide</string>
 
 </resources>
