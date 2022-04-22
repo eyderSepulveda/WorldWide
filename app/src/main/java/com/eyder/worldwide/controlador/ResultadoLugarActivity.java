@@ -1,7 +1,5 @@
-package com.eyder.worldwide.vistas;
+package com.eyder.worldwide.controlador;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,21 +8,18 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.eyder.worldwide.R;
+import com.eyder.worldwide.db.Firebase;
 import com.eyder.worldwide.entidades.Lugar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Objects;
 
 public class ResultadoLugarActivity extends AppCompatActivity {
 
-    private FirebaseFirestore db;
+    private Firebase db;
     private final String TAG = "busqueda";
     private String continente,stringSol,stringNaturaleza,stringCultural,stringGastronomico;
     private RecyclerView ListaLugares;
@@ -35,7 +30,7 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado_lugar);
 
-        db = FirebaseFirestore.getInstance();
+        db = new Firebase();
         continente = getIntent().getStringExtra("continente");
         stringSol= getIntent().getStringExtra("sol");
         stringNaturaleza=getIntent().getStringExtra("naturaleza");
@@ -46,7 +41,7 @@ public class ResultadoLugarActivity extends AppCompatActivity {
     }
 
     private void buscarLugares(){
-        db.collection("Lugares").whereEqualTo("continente", continente).
+        db.getFirebaseFirestore().collection("Lugares").whereEqualTo("continente", continente).
                 whereArrayContainsAny("tipoTurismo", Arrays.asList(stringSol, stringNaturaleza, stringCultural, stringGastronomico))
                 .get()
                 .addOnCompleteListener(task -> {

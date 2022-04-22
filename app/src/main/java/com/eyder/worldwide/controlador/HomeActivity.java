@@ -1,10 +1,9 @@
-package com.eyder.worldwide.vistas;
+package com.eyder.worldwide.controlador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.eyder.worldwide.R;
@@ -16,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
-   private Button buscarDestino, cerrarSesion;
-   private FirebaseAuth mAuth;
+    private Button buscarDestino, cerrarSesion;
+    private FirebaseAuth mAuth;
     private GoogleSignInOptions gso;
     private GoogleSignInClient gsc;
     private GoogleSignInAccount gAccount;

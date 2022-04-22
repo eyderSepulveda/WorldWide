@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vistas.MainActivity">
+    android:background="@drawable/gradient1"
+    tools:context=".controlador.MainActivity">
 
     <Button
         android:id="@+id/btnIniciarSesion"
@@ -37,18 +38,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient1"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="match_parent"
+                android:layout_width="343dp"
                 android:layout_height="96dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/textImagenInicio"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="28sp"
                 tools:ignore="TextContrastCheck" />
 
@@ -63,32 +64,5 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="52dp"
-        android:layout_height="57dp"
-        android:contentDescription="@string/icono"
-        app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642"
-        app:srcCompat="@drawable/iconoapp" />
-
-    <TextView
-        android:id="@+id/textViewNomApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/textviewnombreApp"
-        android:textColor="#FB3305"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

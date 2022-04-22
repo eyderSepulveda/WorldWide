@@ -13,30 +13,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorldWide">
         <activity
-            android:name=".vistas.ResultadoLugarActivity"
-            android:parentActivityName=".vistas.TipoTurismoActivity"
+            android:name=".controlador.ResultadoLugarActivity"
+            android:parentActivityName=".controlador.TipoTurismoActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.TipoTurismoActivity"
-            android:parentActivityName=".vistas.ContinenteActivity"
+            android:name=".controlador.TipoTurismoActivity"
+            android:parentActivityName=".controlador.ContinenteActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.ContinenteActivity"
-            android:parentActivityName=".vistas.HomeActivity"
+            android:name=".controlador.ContinenteActivity"
+            android:parentActivityName=".controlador.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.HomeActivity"
+            android:name=".controlador.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.RegistroActivity"
-            android:parentActivityName=".vistas.IniciarSesionRegistroActivity"
+            android:name=".controlador.RegistroActivity"
+            android:parentActivityName=".controlador.IniciarSesionRegistroActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.IniciarSesionRegistroActivity"
-            android:parentActivityName=".vistas.MainActivity"
+            android:name=".controlador.IniciarSesionRegistroActivity"
+            android:parentActivityName=".controlador.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.MainActivity"
+            android:name=".controlador.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
