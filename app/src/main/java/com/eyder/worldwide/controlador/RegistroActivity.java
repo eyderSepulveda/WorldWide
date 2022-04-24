@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import com.eyder.worldwide.R;
 import com.eyder.worldwide.db.Firebase;
 import com.eyder.worldwide.entidades.Usuario;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +31,7 @@ public class RegistroActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
     private static final String ERROREMAILUSO = "The email address is already in use by another account.";
     private Button registrar;
-    private EditText email, password, passwordConfi;
+    private TextInputLayout email, password, passwordConfi;
 
     private Usuario usuario;
 
@@ -43,8 +46,12 @@ public class RegistroActivity extends AppCompatActivity {
         passwordConfi = findViewById(R.id.editTextContrasena2);
         registrar = findViewById(R.id.buttonResgistrar);
 
-        registrar.setOnClickListener(view -> registrarUsuario(email.getText().toString(), password.getText().toString(), passwordConfi.getText().toString()));
+       //registrar.setOnClickListener(view -> registrarUsuario(email.getText().toString(), password.getText().toString(), passwordConfi.getText().toString()));
 
+        registrar.setOnClickListener(view -> {
+            registrarUsuario(Objects.requireNonNull(email.getEditText()).getText().toString(), Objects.requireNonNull(password.getEditText()).getText().toString(), Objects.requireNonNull(passwordConfi.getEditText()).getText().toString());
+            validarEmail(email.getEditText().getText().toString());
+        });
     }
 
     @Override
@@ -99,5 +106,17 @@ public class RegistroActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), IniciarSesionRegistroActivity.class);
         startActivity(i);
 
+    }
+
+    //Validadar email este escrito correctamente
+    private boolean validarEmail(String correo) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+            email.setError("Correo electrónico inválido");
+            return false;
+        } else {
+            email.setError(null);
+        }
+
+        return true;
     }
 }
