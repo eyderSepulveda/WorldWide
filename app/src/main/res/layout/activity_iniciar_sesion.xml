@@ -7,10 +7,10 @@
     tools:context=".controlador.IniciarSesionRegistroActivity">
 
     <LinearLayout
-        android:layout_width="365dp"
-        android:layout_height="646dp"
-        android:orientation="vertical"
+        android:layout_width="376dp"
+        android:layout_height="644dp"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.636"
@@ -18,26 +18,61 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.768">
 
-        <EditText
-            android:id="@+id/editTextCorreo"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="369dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:hint="@string/usuario"
-            android:autofillHints="" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.923">
 
-        <EditText
-            android:id="@+id/editTextTextContrasena"
-            android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTextCorreo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/usuario"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="369dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:hint="@string/contrasenia"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:autofillHints="" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.332">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTextTextContrasena"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/contrasenia"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/iniciarSesionBtn"
@@ -45,23 +80,17 @@
             android:layout_height="wrap_content"
             android:text="@string/btnIniciarSesion" />
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/signGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <!--<Button
-            android:id="@+id/btnIniciarGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btnIniciarGoogle" />-->
-
         <Button
             android:id="@+id/btnRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btnRegistrarse" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,16 +23,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class IniciarSesionRegistroActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
     private Firebase mAuth;
-    private EditText correo, contrasena;
+    private TextInputLayout correo, contrasena;
     private Button iniciarSesion, registro;
     private SignInButton btnGoogle;
     private GoogleSignInOptions gso;
@@ -45,15 +47,16 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_iniciar_sesion);
 
         mAuth = new Firebase();
-        correo = findViewById(R.id.editTextCorreo);
+        correo = (TextInputLayout) findViewById(R.id.editTextCorreo);
         contrasena = findViewById(R.id.editTextTextContrasena);
         iniciarSesion = findViewById(R.id.iniciarSesionBtn);
         registro = findViewById(R.id.btnRegistro);
         btnGoogle = findViewById(R.id.signGoogle);
         //iniciarSesion.setOnClickListener(view -> iniciarSesion(correo.getText().toString(), contrasena.getText().toString()));
         iniciarSesion.setOnClickListener(view -> {
-            iniciarSesion(correo.getText().toString(), contrasena.getText().toString());
-            validarEmail(correo);
+
+            iniciarSesion(Objects.requireNonNull(correo.getEditText()).getText().toString(), Objects.requireNonNull(contrasena.getEditText()).getText().toString());
+            validarEmail(correo.getEditText().getText().toString());
         });
         registro.setOnClickListener(view -> irRegistrarse1());
 
@@ -114,7 +117,7 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(IniciarSesionRegistroActivity.this, "Authentication failed.",
+                        Toast.makeText(IniciarSesionRegistroActivity.this, "Usuario no registrado",
                                 Toast.LENGTH_SHORT).show();
                         updateUI(null);
                     }
@@ -160,15 +163,17 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     }
 
     //Validadar email este escrito correctamente
-    private boolean validarEmail(EditText correo) {
-        String emailInput = correo.getText().toString();
-        if (!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            return true;
-        } else {
-            Toast.makeText(this, "El usuario no es un correo electronico valido", Toast.LENGTH_SHORT).show();
+    private boolean validarEmail(String correo1) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(correo1).matches()) {
+            correo.setError("Correo electrónico inválido");
             return false;
+        } else {
+            correo.setError(null);
         }
+
+        return true;
     }
+
 
 
 }
