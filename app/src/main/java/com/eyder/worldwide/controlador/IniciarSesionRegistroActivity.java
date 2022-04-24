@@ -45,7 +45,8 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar_sesion);
-
+        //Suprimir la barra de acciones
+        Objects.requireNonNull(getSupportActionBar()).hide();
         mAuth = new Firebase();
         correo = (TextInputLayout) findViewById(R.id.editTextCorreo);
         contrasena = findViewById(R.id.editTextTextContrasena);

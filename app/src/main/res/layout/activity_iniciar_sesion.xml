@@ -13,10 +13,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768">
+        app:layout_constraintVertical_bias="0.816">
 
         <LinearLayout
             android:layout_width="369dp"
@@ -78,13 +78,17 @@
             android:id="@+id/iniciarSesionBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnIniciarSesion" />
+            android:text="@string/btnIniciarSesion"
+            android:textAllCaps="false"
+            android:backgroundTint="#00BFFF"/>
 
         <Button
             android:id="@+id/btnRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnRegistrarse" />
+            android:text="@string/btnRegistrarse"
+            android:textAllCaps="false"
+            android:backgroundTint="#00BFFF"/>
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/signGoogle"
