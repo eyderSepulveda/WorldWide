@@ -8,12 +8,13 @@
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/drawable/borde_redondeado.xml" value="0.3355" />
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/drawable/gradient1.xml" value="0.3355" />
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/drawable/gradiente2.xml" value="0.3355" />
-        <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_home.xml" value="0.32916666666666666" />
-        <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_iniciar_sesion.xml" value="0.3721518987341772" />
+        <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_iniciar_sesion.xml" value="0.3569482288828338" />
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_main.xml" value="0.2796352583586626" />
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_registro.xml" value="0.4" />
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/activity_resultado_lugar.xml" value="0.296195652173913" />
         <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/layout/item_lugar.xml" value="0.296195652173913" />
+        <entry key="..\:/Users/eyder/AndroidStudioProjects/WorldWide/app/src/main/res/menu/bottom_menu.xml" value="0.32916666666666666" />
       </map>
     </option>
   </component>

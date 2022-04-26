@@ -11,7 +11,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,12 +24,18 @@ public class HomeActivity extends AppCompatActivity {
     private GoogleSignInClient gsc;
     private GoogleSignInAccount gAccount;
 
+    private BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //Suprimir la barra de acciones
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
+        bottomNavigationView = findViewById(R.id.bottonNavigationView);
+        bottomNavigationView.setBackground(null);
         buscarDestino = findViewById(R.id.btnBuscarDestino);
         cerrarSesion = findViewById(R.id.btnCerrarSesion);
         mAuth = FirebaseAuth.getInstance();

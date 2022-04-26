@@ -42,6 +42,10 @@
     <string name="world_wide">World Wide</string>
     <string name="places_recommender_app">Places Recommender app</string>
     <string name="todo">logoInicio</string>
+    <string name="home">Inicio</string>
+    <string name="account">Perfil</string>
+    <string name="exit">Salir</string>
+    <string name="search">Lugares</string>
 
 
 </resources>
