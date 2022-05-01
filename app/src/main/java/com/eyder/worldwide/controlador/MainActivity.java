@@ -18,6 +18,7 @@ import com.eyder.worldwide.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -59,11 +60,20 @@ public class MainActivity extends AppCompatActivity {
         gAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         new Handler().postDelayed(() -> {
-            Intent i = new Intent(MainActivity.this, IniciarSesionRegistroActivity.class);
-            Pair[] pairs= new Pair[3];
-            pairs[0]= new Pair<View,String>(imagen,"logo_image");
-            pairs[1]= new Pair<View,String>(logo,"logo_name");
-            pairs[2]= new Pair<View,String>(slogan,"Slogan_name");
+            Intent i = null;
+            Pair[] pairs=null;
+            if(gAccount!=null|| FirebaseAuth.getInstance().getCurrentUser()!=null){
+                i = new Intent(MainActivity.this, HomeActivity.class);
+                pairs= new Pair[2];
+                pairs[0]= new Pair<View,String>(imagen,"logo_image");
+                pairs[1]= new Pair<View,String>(logo,"logo_name");
+            }else{
+                i = new Intent(MainActivity.this, IniciarSesionRegistroActivity.class);
+                pairs= new Pair[3];
+                pairs[0]= new Pair<View,String>(imagen,"logo_image");
+                pairs[1]= new Pair<View,String>(logo,"logo_name");
+                pairs[2]= new Pair<View,String>(slogan,"Slogan_name");
+            }
 
             ActivityOptions option=ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
             startActivity(i,option.toBundle());

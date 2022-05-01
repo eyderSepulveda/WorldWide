@@ -57,18 +57,17 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         buscarLugares();
 
         bottomNavigationView2.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
-               case R.id.search:
-                    irContinente();
-                    return true;
-                case R.id.home1:
-                    irhome();
-                    return true;
-                case R.id.account:
-                    //irPerfil();
-                    return true;
+
+            if (item.getItemId() == R.id.home1) {
+                irhome();
+                return true;
+            }else if (item.getItemId() == R.id.search){
+                irContinente();
+            }else if (item.getItemId() == R.id.account){
+                //irPerfil();
             }
             return false;
+
         });
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

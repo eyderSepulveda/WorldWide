@@ -49,6 +49,8 @@
     <string name="logo">logo</string>
     <string name="hola_bienvenido">Hola! Bienvenido</string>
     <string name="logueate_para_continuar">Logueate para continuar</string>
+    <string name="imagen1">imagen1</string>
+    <string name="LugarReco">Lugares recomendados</string>
 
 
 </resources>
