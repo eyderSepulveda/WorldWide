@@ -17,6 +17,7 @@
         android:layout_marginTop="220dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/mapa_1"
+        android:transitionName="logo_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="70sp"
+        android:transitionName="logo_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagen" />
@@ -44,6 +46,7 @@
         android:text="@string/places_recommender_app"
         android:textAlignment="center"
         android:textSize="21sp"
+        android:transitionName="Slogan_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"

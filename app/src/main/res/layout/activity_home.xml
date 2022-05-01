@@ -7,58 +7,60 @@
     android:orientation="vertical"
     tools:context=".controlador.HomeActivity">
 
-    <Button
-        android:id="@+id/btnBuscarDestino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#00BFFF"
-        android:text="@string/buttonBuscarDestino" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="658dp">
 
-    <TextView
-        android:id="@+id/textViewRecomendado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/LugarRecomendado" />
+        <Button
+            android:id="@+id/btnRecomendado4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/btnRecomendar4"
+            app:layout_constraintStart_toEndOf="@+id/btnRecomendado2"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecomendado3" />
 
-    <Button
-        android:id="@+id/btnRecomendado1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
-        android:text="@string/btnRecomendar1" />
+        <Button
+            android:id="@+id/btnRecomendado2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/btnRecomendar2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecomendado1" />
 
-    <Button
-        android:id="@+id/btnRecomendado2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:text="@string/btnRecomendar2" />
+        <TextView
+            android:id="@+id/textViewRecomendado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="200dp"
+            android:text="@string/LugarRecomendado"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnRecomendado3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/btnRecomendar3" />
+        <Button
+            android:id="@+id/btnRecomendado1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/btnRecomendar1"
+            app:layout_constraintEnd_toStartOf="@+id/btnRecomendado3"
+            app:layout_constraintHorizontal_bias="0.223"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRecomendado" />
 
-    <Button
-        android:id="@+id/btnRecomendado4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:text="@string/btnRecomendar4" />
-
-    <Button
-        android:id="@+id/btnCerrarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="160dp"
-        android:backgroundTint="#00BFFF"
-        android:text="@string/buttonCerrarSesion" />
+        <Button
+            android:id="@+id/btnRecomendado3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:text="@string/btnRecomendar3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnRecomendado1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottonAppBar"
@@ -76,10 +78,5 @@
             android:layout_marginEnd="20dp"
             app:labelVisibilityMode="labeled"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
-
-
-    
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

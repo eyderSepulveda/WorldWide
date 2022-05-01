@@ -46,6 +46,9 @@
     <string name="account">Perfil</string>
     <string name="exit">Salir</string>
     <string name="search">Lugares</string>
+    <string name="logo">logo</string>
+    <string name="hola_bienvenido">Hola! Bienvenido</string>
+    <string name="logueate_para_continuar">Logueate para continuar</string>
 
 
 </resources>

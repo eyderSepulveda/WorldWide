@@ -1,15 +1,25 @@
 package com.eyder.worldwide.controlador;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.eyder.worldwide.R;
 import com.eyder.worldwide.db.Firebase;
 import com.eyder.worldwide.entidades.Lugar;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -19,17 +29,25 @@ import java.util.Objects;
 
 public class ResultadoLugarActivity extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient gsc;
+    private GoogleSignInAccount gAccount;
     private Firebase db;
     private final String TAG = "busqueda";
     private String continente,stringSol,stringNaturaleza,stringCultural,stringGastronomico;
     private RecyclerView ListaLugares;
     private ArrayList<Lugar> lista;
+    private BottomNavigationView bottomNavigationView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado_lugar);
 
+        mAuth = FirebaseAuth.getInstance();
+        bottomNavigationView2 = findViewById(R.id.bottonNavigationView2);
+        bottomNavigationView2.setBackground(null);
         db = new Firebase();
         continente = getIntent().getStringExtra("continente");
         stringSol= getIntent().getStringExtra("sol");
@@ -37,6 +55,26 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         stringCultural=getIntent().getStringExtra("cultural");
         stringGastronomico=getIntent().getStringExtra("gastronomico");
         buscarLugares();
+
+        bottomNavigationView2.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+               case R.id.search:
+                    irContinente();
+                    return true;
+                case R.id.home1:
+                    irhome();
+                    return true;
+                case R.id.account:
+                    //irPerfil();
+                    return true;
+            }
+            return false;
+        });
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        gsc = GoogleSignIn.getClient(this, gso);
 
     }
 
@@ -73,4 +111,16 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void irContinente(){
+        Intent i = new Intent(this, ContinenteActivity.class);
+        startActivity(i);
+
+    }
+    private void irhome(){
+        Intent i = new Intent(this, HomeActivity.class);
+        startActivity(i);
+
+    }
+
 }

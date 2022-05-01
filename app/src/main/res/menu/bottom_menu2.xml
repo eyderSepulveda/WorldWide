@@ -16,10 +16,4 @@
         android:title="@string/search"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_search"/>
-    <item
-        android:id="@+id/exit"
-        android:title="@string/exit"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_exit"/>
-
 </menu>

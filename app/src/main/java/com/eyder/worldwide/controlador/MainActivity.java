@@ -2,9 +2,11 @@ package com.eyder.worldwide.controlador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -13,18 +15,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eyder.worldwide.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN=5000;
+    private static int SPLASH_SCREEN=3000;
 
     //vairables
-    Animation topAnimation,buttonAnimation;
+    private Animation topAnimation,buttonAnimation;
 
-    ImageView imagen;
-    TextView logo,slogan;
+    private ImageView imagen;
+    private TextView logo,slogan;
+    private GoogleSignInOptions gso;
+    private GoogleSignInAccount gAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +53,21 @@ public class MainActivity extends AppCompatActivity {
         logo.setAnimation(buttonAnimation);
         slogan.setAnimation(buttonAnimation);
 
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        gAccount = GoogleSignIn.getLastSignedInAccount(this);
+
         new Handler().postDelayed(() -> {
             Intent i = new Intent(MainActivity.this, IniciarSesionRegistroActivity.class);
-            startActivity(i);
-            finish();
+            Pair[] pairs= new Pair[3];
+            pairs[0]= new Pair<View,String>(imagen,"logo_image");
+            pairs[1]= new Pair<View,String>(logo,"logo_name");
+            pairs[2]= new Pair<View,String>(slogan,"Slogan_name");
+
+            ActivityOptions option=ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
+            startActivity(i,option.toBundle());
+
         },SPLASH_SCREEN);
     }
 

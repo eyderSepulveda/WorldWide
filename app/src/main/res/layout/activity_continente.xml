@@ -8,10 +8,10 @@
 
 
     <LinearLayout
-        android:layout_width="375dp"
-        android:layout_height="701dp"
-        android:orientation="vertical"
+        android:layout_width="385dp"
+        android:layout_height="610dp"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,4 +53,27 @@
             android:layout_height="wrap_content"
             android:text="@string/buttonOceania" />
     </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottonAppBar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/white"
+            >
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottonNavigationView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:menu="@menu/bottom_menu2"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="20dp"
+                app:labelVisibilityMode="labeled"/>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

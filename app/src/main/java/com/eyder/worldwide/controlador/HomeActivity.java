@@ -1,9 +1,11 @@
 package com.eyder.worldwide.controlador;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import com.eyder.worldwide.R;
@@ -12,18 +14,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button buscarDestino, cerrarSesion;
     private FirebaseAuth mAuth;
     private GoogleSignInOptions gso;
     private GoogleSignInClient gsc;
     private GoogleSignInAccount gAccount;
-
     private BottomNavigationView bottomNavigationView;
 
 
@@ -36,22 +37,42 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottonNavigationView);
         bottomNavigationView.setBackground(null);
-        buscarDestino = findViewById(R.id.btnBuscarDestino);
-        cerrarSesion = findViewById(R.id.btnCerrarSesion);
         mAuth = FirebaseAuth.getInstance();
-        buscarDestino.setOnClickListener(view -> irContinente());
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.exit:
+                    cerrarSesion();
+                    return true;
+                case R.id.search:
+                    irContinente();
+                    return true;
+                case R.id.home1:
+                    irHome();
+                    return true;
+                case R.id.account:
+                    //irPerfil();
+                    return true;
+            }
+            return false;
+        });
+
+
+       gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
         gsc = GoogleSignIn.getClient(this, gso);
-
-
-        cerrarSesion.setOnClickListener(view -> cerrarSesion());
     }
+
 
     private void irContinente(){
         Intent i = new Intent(this, ContinenteActivity.class);
+        startActivity(i);
+
+    }
+    private void irHome(){
+        Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
 
     }
