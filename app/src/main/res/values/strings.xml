@@ -49,8 +49,16 @@
     <string name="logo">logo</string>
     <string name="hola_bienvenido">Hola! Bienvenido</string>
     <string name="logueate_para_continuar">Logueate para continuar</string>
-    <string name="imagen1">imagen1</string>
+    <string name="gastronomico">Gastronómico</string>
     <string name="LugarReco">Lugares recomendados</string>
+    <string name="sol_playa">Sol y Playa</string>
+    <string name="naturaleza1">Naturaleza</string>
+    <string name="cultural1">Cultural</string>
+    <string name="solPlaya">sol</string>
+    <string name="naturaleza">Naturaleza</string>
+    <string name="gastronomia">Gastronomia</string>
+    <string name="cultural">Cultural</string>
+    <string name="encuentra">Descubre el mundo entero</string>
 
 
 </resources>
