@@ -55,6 +55,7 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         stringCultural=getIntent().getStringExtra("cultural");
         stringGastronomico=getIntent().getStringExtra("gastronomico");
         buscarLugares();
+        buscarLugaresTipoTur();
 
         bottomNavigationView2.setOnItemSelectedListener(item -> {
 
@@ -110,6 +111,43 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void buscarLugaresTipoTur(){
+        db.getFirebaseFirestore().collection("Lugares").
+                whereArrayContainsAny("tipoTurismo", Arrays.asList(stringSol, stringNaturaleza, stringCultural, stringGastronomico))
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        int con = 0;
+                        lista= new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Lugar lugar=new Lugar(Integer.parseInt(document.getId()), Objects.requireNonNull(document.getData().get("nombre")).toString(), Objects.requireNonNull(document.getData().get("descripcion")).toString());
+                            lista.add(lugar);
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            con ++;
+                        }
+                        ListaLugares = findViewById(R.id.lugares);
+
+                        // use this setting to improve performance if you know that changes
+                        // in content do not change the layout size of the RecyclerView
+                        ListaLugares.setHasFixedSize(true);
+
+                        // use a linear layout manager
+                        ListaLugares.setLayoutManager(new LinearLayoutManager(this));
+
+                        // specify an adapter with the list to show
+                        LugaresAdapter adapter = new LugaresAdapter(lista);
+                        ListaLugares.setAdapter(adapter);
+                        Log.d(TAG, "total array " +lista.size());
+                        Log.d(TAG, "Se encontraron " + con +" lugares");
+                    } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
+                    }
+                });
+    }
+
+
+
 
     private void irContinente(){
         Intent i = new Intent(this, ContinenteActivity.class);
