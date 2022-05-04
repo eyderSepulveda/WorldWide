@@ -17,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class ContinenteActivity extends AppCompatActivity {
 
     Button btnAfrica, btnAmerica, btnAsia, btnEuropa, btnOceania;
@@ -31,15 +33,17 @@ public class ContinenteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_continente);
+        //Suprimir la barra de acciones
+        Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView4 = findViewById(R.id.bottonNavigationView3);
         bottomNavigationView4.setBackground(null);
-        btnAfrica = findViewById(R.id.btnAfrica);
+       /* btnAfrica = findViewById(R.id.btnAfrica);
         btnAmerica = findViewById(R.id.btnAmerica);
         btnAsia = findViewById(R.id.btnAsia);
         btnEuropa = findViewById(R.id.btnEuropa);
-        btnOceania = findViewById(R.id.btnOceania);
+        btnOceania = findViewById(R.id.btnOceania);*/
 
-        btnAfrica.setOnClickListener(view -> irTipoTurismo("africa"));
+        /*btnAfrica.setOnClickListener(view -> irTipoTurismo("africa"));
 
         btnAmerica.setOnClickListener(view -> irTipoTurismo("america"));
 
@@ -47,7 +51,7 @@ public class ContinenteActivity extends AppCompatActivity {
 
         btnEuropa.setOnClickListener(view -> irTipoTurismo("Europa"));
 
-        btnOceania.setOnClickListener(view -> irTipoTurismo("oceania"));
+        btnOceania.setOnClickListener(view -> irTipoTurismo("oceania"));*/
 
         bottomNavigationView4.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home1) {
