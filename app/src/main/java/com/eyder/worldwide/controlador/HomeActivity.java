@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private CardView card1, card2, card3, card4;
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,98 +56,78 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.exit:
-                    cerrarSesion();
-                    return true;
-                case R.id.search:
-                    irContinente();
-                    return true;
-                case R.id.home1:
-                    irHome();
-                    return true;
-                case R.id.account:
-                    //irPerfil();
-                    return true;
+            if (item.getItemId() == R.id.home1) {
+                irHome();
+                return true;
+            } else if (item.getItemId() == R.id.exit) {
+                cerrarSesion();
+                return true;
+            } else if (item.getItemId() == R.id.account) {
+                irPerfil();
+                return true;
             }
             return false;
         });
 
-
-       gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
         gsc = GoogleSignIn.getClient(this, gso);
     }
 
-
-    private void irContinente(){
-        Intent i = new Intent(this, ContinenteActivity.class);
-        startActivity(i);
+    //Metodos para los cardView
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.cardLugar1) {
+            irContinente("sol");
+        } else if (id == R.id.cardLugar2) {
+            irContinente("naturaleza");
+        } else if (id == R.id.cardLugar3) {
+            irContinente("gastronomico");
+        } else {
+            irContinente("cultural");
+        }
 
     }
-    private void irHome(){
+
+    private void irContinente(String tourism) {
+        Bundle tipoTurismo = new Bundle();
+        tipoTurismo.putString("tourism", tourism);
+        Intent i = new Intent(this, ContinenteActivity.class);
+        i.putExtras(tipoTurismo);
+        startActivity(i);
+    }
+
+    //Metodos para los botones de la barra de navegacion
+    private void irHome() {
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
 
     }
 
-    private void irInicioSesion(){
-        Intent i = new Intent(this, IniciarSesionRegistroActivity.class);
-        startActivity(i);
-        finish();
+    private void irPerfil(){
+
     }
 
-    private void cerrarSesion(){
-        if (mAuth.getCurrentUser() != null){
+    private void cerrarSesion() {
+        if (mAuth.getCurrentUser() != null) {
             mAuth.signOut();
             irInicioSesion();
         }
-        gAccount=GoogleSignIn.getLastSignedInAccount(this);
+        gAccount = GoogleSignIn.getLastSignedInAccount(this);
 
-        if(gAccount!=null){
+        if (gAccount != null) {
             gsc.signOut();  //Deslogar para Google
             irInicioSesion();
         }
     }
 
-
-    @Override
-    public void onClick(View view) {
-        Intent i;
-        int id = view.getId();
-        if (id == R.id.cardLugar1) {
-            irResultadoLugar();
-        } else if (id == R.id.cardLugar2) {
-            irResultadoLugar();
-        } else if (id == R.id.cardLugar3) {
-            irResultadoLugar();
-        } else {
-            irResultadoLugar();
-        }
-
-    }
-
-    private void irResultadoLugar(){
-        //Intent i = new Intent(this, ResultadoLugarActivity.class);
-       // startActivity(i);
-
-        String stringSol =  (card1.isClickable() ? "sol" : "No");
-        String stringNaturaleza =  (card2.isClickable() ? "naturaleza" : "No");
-        String stringGastronomico =  (card3.isClickable() ? "gastronomico" : "No");
-        String stringCultural =  (card4.isClickable() ? "cultural" : "No");
-        Bundle continentes = new Bundle();
-
-        Intent i = new Intent(this, ResultadoLugarActivity.class);
-        i.putExtras(continentes);
-        i.putExtra("sol", stringSol);
-        i.putExtra("naturaleza", stringNaturaleza);
-        i.putExtra("cultural", stringCultural);
-        i.putExtra("gastronomico", stringGastronomico);
+    private void irInicioSesion() {
+        Intent i = new Intent(this, IniciarSesionRegistroActivity.class);
         startActivity(i);
         finish();
-
-
-
     }
+
+
 }

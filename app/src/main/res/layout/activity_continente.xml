@@ -13,14 +13,23 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
+        <TextView
+            android:id="@+id/tipoTur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_primary"
+             />
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/contAfrica"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             app:cardCornerRadius="15dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:elevation="30dp">
+            android:elevation="30dp"
+            tools:ignore="InvalidId">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -51,13 +60,15 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/contAmerica"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             app:cardCornerRadius="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:elevation="15dp">
+            android:elevation="15dp"
+            tools:ignore="InvalidId">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -88,10 +99,11 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/contAsia"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             app:cardCornerRadius="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:elevation="15dp">
@@ -125,10 +137,11 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/contEuropa"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             app:cardCornerRadius="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:elevation="15dp">
@@ -161,10 +174,11 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/contOceania"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             app:cardCornerRadius="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:elevation="15dp">

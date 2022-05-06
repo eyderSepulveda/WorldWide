@@ -14,11 +14,6 @@
         android:theme="@style/Theme.WorldWide">
         <activity
             android:name=".controlador.ResultadoLugarActivity"
-            android:parentActivityName=".controlador.TipoTurismoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controlador.TipoTurismoActivity"
-            android:parentActivityName=".controlador.ContinenteActivity"
             android:exported="false" />
         <activity
             android:name=".controlador.ContinenteActivity"
