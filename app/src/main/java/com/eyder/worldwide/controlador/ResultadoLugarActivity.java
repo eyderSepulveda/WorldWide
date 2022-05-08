@@ -45,6 +45,9 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado_lugar);
 
+        //Suprimir la barra de acciones
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         mAuth = FirebaseAuth.getInstance();
         bottomNavigationView2 = findViewById(R.id.bottonNavigationView2);
         bottomNavigationView2.setBackground(null);
@@ -87,6 +90,9 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                         lista= new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Lugar lugar=new Lugar(Integer.parseInt(document.getId()), Objects.requireNonNull(document.getData().get("nombre")).toString(), Objects.requireNonNull(document.getData().get("descripcion")).toString());
+                            lugar.setFechaVisita(Objects.requireNonNull(document.getData().get("fechaVisita")).toString());
+                            lugar.setImagen(Objects.requireNonNull(document.getData().get("imagen")).toString());
+
                             lista.add(lugar);
                             Log.d(TAG, document.getId() + " => " + document.getData());
                             con ++;

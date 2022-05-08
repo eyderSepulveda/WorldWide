@@ -61,6 +61,8 @@
     <string name="encuentra">Descubre el mundo</string>
     <string name="usuario_no_registrado">Usuario no registrado</string>
     <string name="error">Error</string>
+    <string name="imagenResul">img resultado</string>
+    <string name="temperatura">Visitar:</string>
 
 
 </resources>

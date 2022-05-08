@@ -10,7 +10,15 @@ public class Lugar {
     private ArrayList<TipoTurismo> tipoTurismo;
     private String transporte;
     private String descripcion;
+    private String imagen;
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     public Lugar(int id, String nombre, Continente continente, String fechaVisita, ArrayList<TipoTurismo> tipoTurismo, String transporte, String descripcion) {
         this.id = id;
