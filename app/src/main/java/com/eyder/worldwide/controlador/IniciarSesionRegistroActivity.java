@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eyder.worldwide.R;
@@ -41,6 +43,7 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     private GoogleSignInOptions gso;
     private GoogleSignInClient gsc;
     private GoogleSignInAccount gAccount;
+    private TextView error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +54,19 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         //Suprimir la barra de acciones
         Objects.requireNonNull(getSupportActionBar()).hide();
         mAuth = new Firebase();
-        correo = (TextInputLayout) findViewById(R.id.editTextCorreo);
+        correo = findViewById(R.id.editTextCorreo);
         contrasena = findViewById(R.id.editTextTextContrasena);
         iniciarSesion = findViewById(R.id.iniciarSesionBtn);
         registro = findViewById(R.id.btnRegistro);
         btnGoogle = findViewById(R.id.signGoogle);
-        //iniciarSesion.setOnClickListener(view -> iniciarSesion(correo.getText().toString(), contrasena.getText().toString()));
-        iniciarSesion.setOnClickListener(view -> {
 
+        error = findViewById(R.id.mensajeError);
+        error.setVisibility(View.INVISIBLE);
+
+        iniciarSesion.setOnClickListener(view -> {
             iniciarSesion(Objects.requireNonNull(correo.getEditText()).getText().toString(), Objects.requireNonNull(contrasena.getEditText()).getText().toString());
-            validarEmail(correo.getEditText().getText().toString());
         });
+
         registro.setOnClickListener(view -> irRegistrarse1());
 
         /*LOGUEAR GOOGLE*/
@@ -108,24 +113,52 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void iniciarSesion(String email, String password) {
         // [START sign_in_with_email]
+        try {
+            boolean emailValido=false;
+            //Valida que email no sea nulo
+            if(email ==null||email.length()==0){
+                correo.setError("Usuario requerido");
+            }else{
+                emailValido=validarEmail(email);
+            }
+            //Valida que contraseña no sea nulo
+            if(password==null||password.length()==0){
+                contrasena.setError("Contraseña requerida");
+            }else{
+                contrasena.setError(null);
+            }
 
-        mAuth.getFirebaseAuth().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success");
-                        FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
-                        updateUI(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(IniciarSesionRegistroActivity.this, "Usuario no registrado",
-                                Toast.LENGTH_SHORT).show();
-                        updateUI(null);
-                    }
-                });
+            if(emailValido && password.length()>0){
+                mAuth.getFirebaseAuth().signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                String mensaje=task.getException().getMessage();
+                                if(mensaje.contains("The password is invalid")){
+                                    error.setVisibility(View.INVISIBLE);
+                                    contrasena.setError("La contraseña no es válida");
+
+                                }else if(mensaje.contains("There is no user record")){
+                                    error.setText("Usuario no registrado");
+                                    error.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+            }
+        }catch (Exception e){
+            Toast.makeText(IniciarSesionRegistroActivity.this, "Se ha producido un error",
+                    Toast.LENGTH_SHORT).show();
+        }
+
         // [END sign_in_with_email]
     }
 

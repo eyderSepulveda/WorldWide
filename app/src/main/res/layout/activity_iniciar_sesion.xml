@@ -133,6 +133,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/mensajeError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/usuario_no_registrado"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

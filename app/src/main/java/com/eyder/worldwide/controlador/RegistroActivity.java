@@ -2,6 +2,7 @@ package com.eyder.worldwide.controlador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eyder.worldwide.R;
@@ -32,6 +34,7 @@ public class RegistroActivity extends AppCompatActivity {
     private static final String ERROREMAILUSO = "The email address is already in use by another account.";
     private Button registrar;
     private TextInputLayout email, password, passwordConfi;
+    private TextView error;
 
     private Usuario usuario;
 
@@ -46,11 +49,10 @@ public class RegistroActivity extends AppCompatActivity {
         passwordConfi = findViewById(R.id.editTextContrasena2);
         registrar = findViewById(R.id.buttonResgistrar);
 
-       //registrar.setOnClickListener(view -> registrarUsuario(email.getText().toString(), password.getText().toString(), passwordConfi.getText().toString()));
-
+        error = findViewById(R.id.errorRegistro);
+        error.setVisibility(View.INVISIBLE);
         registrar.setOnClickListener(view -> {
             registrarUsuario(Objects.requireNonNull(email.getEditText()).getText().toString(), Objects.requireNonNull(password.getEditText()).getText().toString(), Objects.requireNonNull(passwordConfi.getEditText()).getText().toString());
-            validarEmail(email.getEditText().getText().toString());
         });
     }
 
@@ -65,39 +67,79 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void registrarUsuario(String correo, String password1, String pasworrd2) {
+        try{
+            boolean emailvalido=false;
+            boolean pwCorrecto=false,pwCorrecto2=false;
+            /*Validamos el correo no sea vacio*/
+            if(correo.length()==0){
+                email.setError("Correo eléctronico requerido");
+            }else{
+                emailvalido=validarEmail(correo);
+            }
+            /*Validamos el password1 no sea vacio*/
+            if(password1.length()==0){
+                password.setError("Contraseña requerida");
+            }else if(!password1.equals(pasworrd2)){
+                password.setError("Las contraseñas no coinciden");
+            }else if(password1.length()<6){
+                password.setError("Debe ser de al menos 6 caracteres");
+            }else{
+                password.setError(null);
+                pwCorrecto=true;
+            }
+            /*Validamos el pasworrd2 no sea vacio*/
+            if(pasworrd2.length()==0){
+                passwordConfi.setError("Confirmar contraseña requerida");
+            }else if(!password1.equals(pasworrd2)){
+                passwordConfi.setError("Las contraseñas no coinciden");
+            }else if(pasworrd2.length()<6){
+                passwordConfi.setError("Debe ser de al menos 6 caracteres");
+            }else{
+                passwordConfi.setError(null);
+                pwCorrecto2=true;
+            }
 
-      if (password1.equals(pasworrd2)) {
+            if (emailvalido&&pwCorrecto&&pwCorrecto2) {
 
-            Task<AuthResult> authResultTask = mAuth.getFirebaseAuth().createUserWithEmailAndPassword(correo, password1)
-                    .addOnCompleteListener(this, task -> {
+                @SuppressLint("SetTextI18n") Task<AuthResult> authResultTask = mAuth.getFirebaseAuth().createUserWithEmailAndPassword(correo, password1)
+                        .addOnCompleteListener(this, task -> {
 
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "USUARIO CREADO CORRECTAMENTE");
-                            FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "USUARIO NO SE HA CREADO", task.getException());
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "USUARIO CREADO CORRECTAMENTE");
+                                FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "USUARIO NO SE HA CREADO", task.getException());
 
-                            //Log.w(TAG, task.getException().getMessage());
-                            if (ERROREMAILUSO.equals(Objects.requireNonNull(task.getException()).getMessage())) {
-                                Toast.makeText(RegistroActivity.this, "El correo electronico ya se encuentra registrado",
-                                        Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(RegistroActivity.this, "No se ha podido crear la cuenta",
-                                        Toast.LENGTH_SHORT).show();
+                                //Log.w(TAG, task.getException().getMessage());
+                                String mensaje=task.getException().getMessage();
+                                if (ERROREMAILUSO.contains(mensaje)) {
+                                    error.setText("El correo eléctronico ya se encuentra registrado");
+                                    error.setError("El correo eléctronico ya se encuentra registrado");
+                                    error.setVisibility(View.VISIBLE);
+                                }else{
+                                    error.setText("No se ha podido crear la cuenta");
+                                    error.setError("No se ha podido crear la cuenta");
+                                    error.setVisibility(View.VISIBLE);
+                                }
+                                //updateUI(null);
                             }
-                            //updateUI(null);
-                        }
-                    });
-        } else {
-            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                        });
+            }
+        }catch (Exception e){
+            Toast.makeText(RegistroActivity.this, "Se ha producido un error",
+                    Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
+
+
+
+
+
+
+
 
     private void reload() {
     }

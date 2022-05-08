@@ -59,6 +59,8 @@
     <string name="gastronomia">Gastronomia</string>
     <string name="cultural">Cultural</string>
     <string name="encuentra">Descubre el mundo</string>
+    <string name="usuario_no_registrado">Usuario no registrado</string>
+    <string name="error">Error</string>
 
 
 </resources>
