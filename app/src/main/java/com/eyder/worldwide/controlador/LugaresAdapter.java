@@ -1,5 +1,6 @@
 package com.eyder.worldwide.controlador;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
 
     private ArrayList<Lugar> lugarModelList;
 
+
     public LugaresAdapter(ArrayList<Lugar> lugarModelList) {
         this.lugarModelList = lugarModelList;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,9 +39,12 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
         String name = lugarModelList.get(position).getNombre();
         String fechaVisita = lugarModelList.get(position).getFechaVisita();
         String imagenCarga = lugarModelList.get(position).getImagen();
+        String descripcion = lugarModelList.get(position).getDescripcion();
         holder.name.setText(name);
         holder.fechaVisita.setText(fechaVisita);
         Picasso.get().load(imagenCarga).into(holder.imagen);
+        holder.descripcion.setText(descripcion);
+
     }
 
     @Override
@@ -47,7 +53,7 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView name, fechaVisita;
+        private TextView name, fechaVisita, descripcion;
         private ImageView imagen;
 
 
@@ -56,6 +62,7 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
             name = (TextView) v.findViewById(R.id.nombreLugar);
             fechaVisita = (TextView) v.findViewById(R.id.resulTemp);
             imagen = v.findViewById(R.id.imgLugarmuestra);
+            descripcion = v.findViewById(R.id.descripcion);
         }
     }
 

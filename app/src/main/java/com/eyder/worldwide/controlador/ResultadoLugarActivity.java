@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.eyder.worldwide.R;
 import com.eyder.worldwide.db.Firebase;
@@ -40,6 +46,10 @@ public class ResultadoLugarActivity extends AppCompatActivity {
     private ArrayList<Lugar> lista;
     private BottomNavigationView bottomNavigationView2;
 
+    //Para mostrar la descripcion
+   /* private TextView descripcion;
+    private LinearLayout layout;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,11 @@ public class ResultadoLugarActivity extends AppCompatActivity {
 
         //Suprimir la barra de acciones
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        //Para mostrar la descripcion
+      /*  descripcion = findViewById(R.id.descripcion);
+        layout = findViewById(R.id.layout1);
+        layout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);*/
 
         mAuth = FirebaseAuth.getInstance();
         bottomNavigationView2 = findViewById(R.id.bottonNavigationView2);
@@ -92,6 +107,7 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                             Lugar lugar=new Lugar(Integer.parseInt(document.getId()), Objects.requireNonNull(document.getData().get("nombre")).toString(), Objects.requireNonNull(document.getData().get("descripcion")).toString());
                             lugar.setFechaVisita(Objects.requireNonNull(document.getData().get("fechaVisita")).toString());
                             lugar.setImagen(Objects.requireNonNull(document.getData().get("imagen")).toString());
+                            lugar.setDescripcion(Objects.requireNonNull(document.getData().get("descripcion")).toString());
 
                             lista.add(lugar);
                             Log.d(TAG, document.getId() + " => " + document.getData());
@@ -146,4 +162,11 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         finish();
     }
 
+
+    //Para mostrar la descripcion
+/*        public void expand(View view) {
+        int v = (descripcion.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+        TransitionManager.beginDelayedTransition(layout, new AutoTransition());
+        descripcion.setVisibility(v);
+    }*/
 }
