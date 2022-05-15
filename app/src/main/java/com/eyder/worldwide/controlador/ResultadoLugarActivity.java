@@ -2,17 +2,22 @@ package com.eyder.worldwide.controlador;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.LayoutTransition;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,8 +52,9 @@ public class ResultadoLugarActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView2;
 
     //Para mostrar la descripcion
-   /* private TextView descripcion;
-    private LinearLayout layout;*/
+    private LinearLayout mostrarLugarDescrip;
+    private ImageButton expandir;
+    private CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +65,9 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         //Para mostrar la descripcion
-      /*  descripcion = findViewById(R.id.descripcion);
-        layout = findViewById(R.id.layout1);
-        layout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);*/
+        mostrarLugarDescrip = findViewById(R.id.layoutDescripcion);
+        cardView = findViewById(R.id.cardLugaresResultado);
+        expandir = findViewById(R.id.showMore);
 
         mAuth = FirebaseAuth.getInstance();
         bottomNavigationView2 = findViewById(R.id.bottonNavigationView2);
@@ -164,9 +170,18 @@ public class ResultadoLugarActivity extends AppCompatActivity {
 
 
     //Para mostrar la descripcion
-/*        public void expand(View view) {
-        int v = (descripcion.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
-        TransitionManager.beginDelayedTransition(layout, new AutoTransition());
-        descripcion.setVisibility(v);
-    }*/
+
+   public void onClick (View view){
+
+        if (mostrarLugarDescrip.getVisibility() == View.GONE){
+            expandir.setBackground(Drawable.createFromPath("@drawable/ic_expand_less"));
+            TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
+            mostrarLugarDescrip.setVisibility(View.VISIBLE);
+        }else {
+            expandir.setBackground(Drawable.createFromPath("@drawable/ic_expand_more"));
+            TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
+            mostrarLugarDescrip.setVisibility(View.GONE);
+        }
+
+   }
 }

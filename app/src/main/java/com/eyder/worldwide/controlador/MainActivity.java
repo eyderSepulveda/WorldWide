@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         gAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         new Handler().postDelayed(() -> {
-            Intent i = null;
+            Intent i;
             Pair[] pairs=null;
             if(gAccount!=null|| FirebaseAuth.getInstance().getCurrentUser()!=null){
                 i = new Intent(MainActivity.this, HomeActivity.class);
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i,option.toBundle());
 
         },SPLASH_SCREEN);
+
     }
 
 

@@ -6,12 +6,15 @@ import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.eyder.worldwide.R;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -44,10 +47,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bottomNavigationView.setBackground(null);
         mAuth = FirebaseAuth.getInstance();
 
-        card1 = (CardView) findViewById(R.id.cardLugar1);
-        card2 = (CardView) findViewById(R.id.cardLugar2);
-        card3 = (CardView) findViewById(R.id.cardLugar3);
-        card4 = (CardView) findViewById(R.id.cardLugar4);
+        card1 = findViewById(R.id.cardLugar1);
+        card2 = findViewById(R.id.cardLugar2);
+        card3 = findViewById(R.id.cardLugar3);
+        card4 = findViewById(R.id.cardLugar4);
 
         card1.setOnClickListener(this);
         card2.setOnClickListener(this);
@@ -73,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .requestEmail()
                 .build();
         gsc = GoogleSignIn.getClient(this, gso);
+
     }
 
     //Metodos para los cardView

@@ -64,6 +64,9 @@
     <string name="imagenResul">img resultado</string>
     <string name="temperatura">Visitar:</string>
     <string name="prueba">pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+    <string name="expand">expand</string>
+    <string name="olvido_contraseña">¿Olvidaste la contraseña?</string>
+    <string name="restablecer_contrasena">Restablecer contraseña</string>
 
 
 </resources>

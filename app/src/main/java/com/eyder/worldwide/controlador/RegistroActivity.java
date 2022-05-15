@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import android.util.Patterns;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.eyder.worldwide.R;
 import com.eyder.worldwide.db.Firebase;
 import com.eyder.worldwide.entidades.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -108,13 +110,31 @@ public class RegistroActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "USUARIO CREADO CORRECTAMENTE");
                                 FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
-                                updateUI(user);
+                                assert user != null;
+                                user.sendEmailVerification().addOnCompleteListener(
+                                        new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    FirebaseAuth.getInstance().signOut();
+                                                    updateUI(user);
+                                                }else{
+                                                    overridePendingTransition(0, 0);
+                                                    finish();
+                                                    overridePendingTransition(0, 0);
+                                                    startActivity(getIntent());
+                                                }
+                                            }
+                                        }
+                                );
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "USUARIO NO SE HA CREADO", task.getException());
 
                                 //Log.w(TAG, task.getException().getMessage());
-                                String mensaje=task.getException().getMessage();
+                                String mensaje= Objects.requireNonNull(task.getException()).getMessage();
+                                assert mensaje != null;
                                 if (ERROREMAILUSO.contains(mensaje)) {
                                     error.setText("El correo eléctronico ya se encuentra registrado");
                                     error.setError("El correo eléctronico ya se encuentra registrado");
@@ -133,11 +153,6 @@ public class RegistroActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
-
 
 
 

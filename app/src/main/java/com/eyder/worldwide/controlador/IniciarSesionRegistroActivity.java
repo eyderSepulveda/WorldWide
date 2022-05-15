@@ -2,6 +2,7 @@ package com.eyder.worldwide.controlador;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -13,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,12 +46,15 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     private GoogleSignInClient gsc;
     private GoogleSignInAccount gAccount;
     private TextView error;
+    private CheckedTextView olvidoContrasena;
+    // Publicidad
+   // private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_iniciar_sesion);
         //Suprimir la barra de acciones
         Objects.requireNonNull(getSupportActionBar()).hide();
@@ -59,12 +64,50 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         iniciarSesion = findViewById(R.id.iniciarSesionBtn);
         registro = findViewById(R.id.btnRegistro);
         btnGoogle = findViewById(R.id.signGoogle);
+        olvidoContrasena = findViewById(R.id.olvidoContrasen);
 
         error = findViewById(R.id.mensajeError);
         error.setVisibility(View.INVISIBLE);
 
+        /*//Inicializar anuncios
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });*/
+
         iniciarSesion.setOnClickListener(view -> {
             iniciarSesion(Objects.requireNonNull(correo.getEditText()).getText().toString(), Objects.requireNonNull(contrasena.getEditText()).getText().toString());
+
+           /* // Publicidad
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+
+            //ca-app-pub-7443524707348098/1578498291
+            InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+                    new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            // The mInterstitialAd reference will be null until
+                            // an ad is loaded.
+                            mInterstitialAd = interstitialAd;
+                            Log.i("tag", "onAdLoaded");
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            // Handle the error
+                            Log.i("tag", loadAdError.getMessage());
+                            mInterstitialAd = null;
+                        }
+                    });
+
+            if (mInterstitialAd != null) {
+                mInterstitialAd.show(IniciarSesionRegistroActivity.this);
+            } else {
+                Log.d("TAG", "The interstitial ad wasn't ready yet.");
+            }*/
+
         });
 
         registro.setOnClickListener(view -> irRegistrarse1());
@@ -103,6 +146,13 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         });
 
 
+        //Olvido contraseña
+        olvidoContrasena.setOnClickListener(view -> {
+                    Intent j = new Intent(this, OlvidoContrasenaActivity.class);
+                    startActivity(j);
+                }
+        );
+
     }
 
     @Override
@@ -117,44 +167,50 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
     private void iniciarSesion(String email, String password) {
         // [START sign_in_with_email]
         try {
-            boolean emailValido=false;
+            boolean emailValido = false;
             //Valida que email no sea nulo
-            if(email ==null||email.length()==0){
+            if (email == null || email.length() == 0) {
                 correo.setError("Usuario requerido");
-            }else{
-                emailValido=validarEmail(email);
+            } else {
+                emailValido = validarEmail(email);
             }
             //Valida que contraseña no sea nulo
-            if(password==null||password.length()==0){
+            if (password == null || password.length() == 0) {
                 contrasena.setError("Contraseña requerida");
-            }else{
+            } else {
                 contrasena.setError(null);
             }
 
-            if(emailValido && password.length()>0){
+            if (emailValido && password.length() > 0) {
                 mAuth.getFirebaseAuth().signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
-                                updateUI(user);
+                                if (user.isEmailVerified()) {
+                                    updateUI(user);
+                                } else {
+                                    error.setText("Debe confirmar el correo eléctronico de registro.");
+                                    error.setVisibility(View.VISIBLE);
+                                    mAuth.getFirebaseAuth().signOut();
+                                }
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                String mensaje=task.getException().getMessage();
-                                if(mensaje.contains("The password is invalid")){
+                                String mensaje = task.getException().getMessage();
+                                if (mensaje.contains("The password is invalid")) {
                                     error.setVisibility(View.INVISIBLE);
                                     contrasena.setError("La contraseña no es válida");
 
-                                }else if(mensaje.contains("There is no user record")){
+                                } else if (mensaje.contains("There is no user record")) {
                                     error.setText("Usuario no registrado");
                                     error.setVisibility(View.VISIBLE);
                                 }
                             }
                         });
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(IniciarSesionRegistroActivity.this, "Se ha producido un error",
                     Toast.LENGTH_SHORT).show();
         }
@@ -210,7 +266,6 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
 
         return true;
     }
-
 
 
 }

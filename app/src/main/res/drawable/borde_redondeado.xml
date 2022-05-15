@@ -10,7 +10,7 @@
     <!-- Color y ancho del borde del elemento -->
     <stroke
         android:width="3dp"
-        android:color="#FA8072" >
+        android:color="#7F69A5" >
     </stroke>
 
     <!-- Si queremos añadir algún padding -->

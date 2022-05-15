@@ -10,11 +10,11 @@
         android:id="@+id/linearLayout5"
         android:layout_width="378dp"
         android:layout_height="250dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="28dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944">
+        app:layout_constraintVertical_bias="0.865">
 
         <LinearLayout
             android:layout_width="369dp"
@@ -99,7 +99,7 @@
                 android:id="@+id/editTextTextContrasena"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="63dp"
                 android:hint="@string/contrasenia"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@null"
@@ -110,12 +110,23 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckedTextView
+                android:id="@+id/olvidoContrasen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="phone|email"
+                android:text="@string/olvido_contraseña"
+                android:textAlignment="center"
+                android:textColor="@color/browser_actions_text_color"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/iniciarSesionBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:backgroundTint="#00BFFF"
             android:text="@string/btnIniciarSesion"
             android:textAllCaps="false" />

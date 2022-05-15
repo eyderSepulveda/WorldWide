@@ -13,23 +13,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorldWide">
         <activity
+            android:name=".controlador.OlvidoContrasenaActivity"
+            android:exported="false" />
+
+<!--         <meta-data-->
+<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--            android:value="ca-app-pub-7443524707348098~4941074521" />-->
+
+        <activity
             android:name=".controlador.ResultadoLugarActivity"
             android:exported="false" />
         <activity
             android:name=".controlador.ContinenteActivity"
-            android:parentActivityName=".controlador.HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".controlador.HomeActivity" />
         <activity
             android:name=".controlador.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".controlador.RegistroActivity"
-            android:parentActivityName=".controlador.IniciarSesionRegistroActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".controlador.IniciarSesionRegistroActivity" />
         <activity
             android:name=".controlador.IniciarSesionRegistroActivity"
-            android:parentActivityName=".controlador.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".controlador.MainActivity" />
         <activity
             android:name=".controlador.MainActivity"
             android:exported="true">
