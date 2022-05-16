@@ -86,12 +86,11 @@
             android:contentDescription="@string/expand"
             android:onClick="onClick"
             android:src="@drawable/ic_expand_more"
+            android:background="#F5F5F5"
             app:layoutDescription="@string/expand"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints,UsingOnClickInXml,TouchTargetSizeCheck" />
-
-
 
         <LinearLayout
             android:id="@+id/layoutDescripcion"

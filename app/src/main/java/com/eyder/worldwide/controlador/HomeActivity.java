@@ -1,26 +1,19 @@
 package com.eyder.worldwide.controlador;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.nfc.Tag;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-
 import com.eyder.worldwide.R;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -33,7 +26,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleSignInAccount gAccount;
     private BottomNavigationView bottomNavigationView;
     private CardView card1, card2, card3, card4;
-
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -57,8 +49,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         card3.setOnClickListener(this);
         card4.setOnClickListener(this);
 
-
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home1) {
                 irHome();
                 return true;
@@ -96,6 +87,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void irContinente(String tourism) {
+
         Bundle tipoTurismo = new Bundle();
         tipoTurismo.putString("tourism", tourism);
         Intent i = new Intent(this, ContinenteActivity.class);

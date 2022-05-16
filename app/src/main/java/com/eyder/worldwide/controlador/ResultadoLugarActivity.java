@@ -1,25 +1,19 @@
 package com.eyder.worldwide.controlador;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.eyder.worldwide.R;
 import com.eyder.worldwide.db.Firebase;
@@ -29,9 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -51,10 +43,6 @@ public class ResultadoLugarActivity extends AppCompatActivity {
     private ArrayList<Lugar> lista;
     private BottomNavigationView bottomNavigationView2;
 
-    //Para mostrar la descripcion
-    private LinearLayout mostrarLugarDescrip;
-    private ImageButton expandir;
-    private CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +52,6 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         //Suprimir la barra de acciones
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        //Para mostrar la descripcion
-        mostrarLugarDescrip = findViewById(R.id.layoutDescripcion);
-        cardView = findViewById(R.id.cardLugaresResultado);
-        expandir = findViewById(R.id.showMore);
 
         mAuth = FirebaseAuth.getInstance();
         bottomNavigationView2 = findViewById(R.id.bottonNavigationView2);
@@ -78,7 +62,6 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         Log.d("continente: " , continente);
         Log.d("stringTipoTurismo: " , stringTipoTurismo);
         buscarLugares();
-
 
         bottomNavigationView2.setOnItemSelectedListener(item -> {
 
@@ -114,6 +97,7 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                             lugar.setFechaVisita(Objects.requireNonNull(document.getData().get("fechaVisita")).toString());
                             lugar.setImagen(Objects.requireNonNull(document.getData().get("imagen")).toString());
                             lugar.setDescripcion(Objects.requireNonNull(document.getData().get("descripcion")).toString());
+                            lugar.setTransporte(Objects.requireNonNull(document.getData().get("transporte")).toString());
 
                             lista.add(lugar);
                             Log.d(TAG, document.getId() + " => " + document.getData());
@@ -133,6 +117,8 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                         ListaLugares.setAdapter(adapter);
                         Log.d(TAG, "total array " +lista.size());
                         Log.d(TAG, "Se encontraron " + con +" lugares");
+
+
                     } else {
                         Log.w(TAG, "Error getting documents.", task.getException());
                     }
@@ -168,20 +154,4 @@ public class ResultadoLugarActivity extends AppCompatActivity {
         finish();
     }
 
-
-    //Para mostrar la descripcion
-
-   public void onClick (View view){
-
-        if (mostrarLugarDescrip.getVisibility() == View.GONE){
-            expandir.setBackground(Drawable.createFromPath("@drawable/ic_expand_less"));
-            TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
-            mostrarLugarDescrip.setVisibility(View.VISIBLE);
-        }else {
-            expandir.setBackground(Drawable.createFromPath("@drawable/ic_expand_more"));
-            TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
-            mostrarLugarDescrip.setVisibility(View.GONE);
-        }
-
-   }
 }

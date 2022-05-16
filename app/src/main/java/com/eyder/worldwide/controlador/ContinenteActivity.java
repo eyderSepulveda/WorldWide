@@ -1,16 +1,13 @@
 package com.eyder.worldwide.controlador;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.eyder.worldwide.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -18,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -36,7 +32,6 @@ public class ContinenteActivity extends AppCompatActivity implements View.OnClic
     private CardView cardAsia, cardAfrica, cardAmerica, cardEuropa, cardOceania;
     private String tipoTurismo;
     private TextView almacenarTipoTurismo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +81,12 @@ public class ContinenteActivity extends AppCompatActivity implements View.OnClic
         gsc = GoogleSignIn.getClient(this, gso);
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -105,7 +106,7 @@ public class ContinenteActivity extends AppCompatActivity implements View.OnClic
 
     //Leer datos en cloud firestore
     private void irResultadoLugar(String continente){
-        Intent i = new Intent(this, ResultadoLugarActivity.class);
+        Intent i = new Intent(this, TransicionActivity.class);
         i.putExtra("tipoTurismo", tipoTurismo);
         i.putExtra("continente", continente);
         startActivity(i);
