@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/blue_primary"
     tools:context=".controlador.HomeActivity">
 
     <LinearLayout
@@ -216,7 +217,7 @@
                         android:layout_width="139dp"
                         android:layout_height="154dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/cultura"
+                        android:src="@drawable/cultu"
                         android:contentDescription="@string/cultural" />
 
                     <TextView
@@ -269,7 +270,7 @@
             android:layout_marginTop="100dp"
             android:fontFamily="@font/bevan"
             android:text="@string/encuentra"
-            android:textColor="@color/gris"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="italic"
              />
