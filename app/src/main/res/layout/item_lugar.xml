@@ -124,6 +124,8 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/borde_redondeado"
                     android:orientation="horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     tools:ignore="UseCompoundDrawables">
 
                     <TextView
