@@ -118,7 +118,7 @@
                 android:autoLink="phone|email"
                 android:text="@string/olvido_contraseña"
                 android:textAlignment="center"
-                android:textColor="@color/browser_actions_text_color"
+                android:textColor="@color/blue_primary"
                 android:textSize="14sp" />
         </LinearLayout>
 

@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_primary"
     tools:context=".controlador.ResultadoLugarActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lugares"
-        android:layout_width="381dp"
-        android:layout_height="674dp"
+        android:layout_width="400dp"
+        android:layout_height="714dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,23 +19,25 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-28dp">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottonAppBar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:backgroundTint="@color/white"
-            >
+            android:backgroundTint="@color/white">
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottonNavigationView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:menu="@menu/bottom_menu2"
-                android:background="@android:color/transparent"
                 android:layout_marginEnd="20dp"
-                app:labelVisibilityMode="labeled"/>
+                android:background="@android:color/transparent"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_menu2" />
         </com.google.android.material.bottomappbar.BottomAppBar>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

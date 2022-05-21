@@ -15,17 +15,14 @@
         <activity
             android:name=".controlador.TransicionActivity"
             android:exported="false" />
-        <!-- publicidad - anuncios -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->
-        <!-- android:value="ca-app-pub-3940256099942544~3347511713" /> -->
-        <!-- ca-app-pub-7443524707348098~4941074521 -->
         <activity
             android:name=".controlador.OlvidoContrasenaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".controlador.IniciarSesionRegistroActivity"/>
         <activity
             android:name=".controlador.ResultadoLugarActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".controlador.ContinenteActivity"/>
         <activity
             android:name=".controlador.ContinenteActivity"
             android:exported="false"
@@ -54,6 +51,11 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <!-- publicidad - anuncios -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7443524707348098~4941074521" />
     </application>
 
 </manifest>
