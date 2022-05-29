@@ -32,7 +32,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private GoogleSignInClient gsc;
     private GoogleSignInAccount gAccount;
     private static final String TAG = "PERFIL";
-    private TextView nombre,email;
+    private TextView nombre, email;
 
 
     @Override
@@ -48,24 +48,39 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         nombre = findViewById(R.id.textNombre);
         email = findViewById(R.id.textCorreoEl);
         mAuth = new Firebase();
-        FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
-        mAuth.getFirebaseFirestore().collection("Usuarios").whereEqualTo("correo", user.getEmail())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        gsc = GoogleSignIn.getClient(this, gso);
+        gAccount = GoogleSignIn.getLastSignedInAccount(this); //Obtiene el ultimo login google
+        //Valida si el usuario ya se ha logueado
+        if (gAccount != null) {
+            //Abre la pagina inicial
+            Log.d(TAG, "USUARIO YA LOGUEADO ANTERIORMENTE");
+            Log.d(TAG, "fullName: " + gAccount.getDisplayName());
+            Log.d(TAG, "Email: " + gAccount.getEmail());
+            email.setText(gAccount.getEmail());
+            nombre.setText(gAccount.getDisplayName());
+        } else if (mAuth.getFirebaseAuth().getCurrentUser() != null) {
+            FirebaseUser user = mAuth.getFirebaseAuth().getCurrentUser();
+            mAuth.getFirebaseFirestore().collection("Usuarios").whereEqualTo("correo", user.getEmail())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    email.setText(user.getEmail());
+                                    nombre.setText(Objects.requireNonNull(document.getData().get("nombre")).toString());
+                                }
+                            } else {
                                 email.setText(user.getEmail());
-                                nombre.setText(Objects.requireNonNull(document.getData().get("nombre")).toString());
+                                nombre.setText("Sin Nombre");
+                                Log.w(TAG, "Error getting documents.", task.getException());
                             }
-                        } else {
-                            email.setText(user.getEmail());
-                            nombre.setText("Sin Nombre");
-                            Log.w(TAG, "Error getting documents.", task.getException());
                         }
-                    }
-                });
+                    });
+        }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home1) {
@@ -80,11 +95,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             }
             return false;
         });
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        gsc = GoogleSignIn.getClient(this, gso);
     }
 
     //Metodos para los botones de la barra de navegacion
@@ -94,14 +104,14 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
     }
 
-    private void irPerfil(){
+    private void irPerfil() {
         Intent i = new Intent(this, PerfilUsuarioActivity.class);
         startActivity(i);
         finish();
     }
 
     private void cerrarSesion() {
-        if (mAuth. getFirebaseAuth().getCurrentUser() != null) {
+        if (mAuth.getFirebaseAuth().getCurrentUser() != null) {
             mAuth.getFirebaseAuth().signOut();
             irInicioSesion();
         }
