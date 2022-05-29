@@ -170,7 +170,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void irPerfil(){
-
+        Intent i = new Intent(this, PerfilUsuarioActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void cerrarSesion() {

@@ -37,8 +37,8 @@ public class ContinenteActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_continente);
-        //Suprimir la barra de acciones
-        Objects.requireNonNull(getSupportActionBar()).hide();
+       //Suprimir la barra de acciones
+        //Objects.requireNonNull(getSupportActionBar()).hide();
         bottomNavigationView4 = findViewById(R.id.bottonNavigationView3);
         bottomNavigationView4.setBackground(null);
 
@@ -139,7 +139,9 @@ public class ContinenteActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void irPerfil(){
-
+        Intent i = new Intent(this, PerfilUsuarioActivity.class);
+        startActivity(i);
+        finish();
     }
 
 }

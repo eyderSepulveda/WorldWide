@@ -67,6 +67,7 @@
     <string name="expand">expand</string>
     <string name="olvido_contraseña">¿Olvidaste la contraseña?</string>
     <string name="restablecer_contrasena">Restablecer contraseña</string>
+    <string name="nombre">Nombre</string>
 
 
 </resources>

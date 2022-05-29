@@ -127,7 +127,9 @@ public class ResultadoLugarActivity extends AppCompatActivity {
 
     //Metodos para los botones de la barra de navegacion
     private void irPerfil(){
-
+        Intent i = new Intent(this, PerfilUsuarioActivity.class);
+        startActivity(i);
+        finish();
     }
     private void irhome(){
         Intent i = new Intent(this, HomeActivity.class);

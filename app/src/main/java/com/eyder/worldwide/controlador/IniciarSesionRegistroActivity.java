@@ -69,44 +69,8 @@ public class IniciarSesionRegistroActivity extends AppCompatActivity {
         error = findViewById(R.id.mensajeError);
         error.setVisibility(View.INVISIBLE);
 
-        /*//Inicializar anuncios
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });*/
-
         iniciarSesion.setOnClickListener(view -> {
             iniciarSesion(Objects.requireNonNull(correo.getEditText()).getText().toString(), Objects.requireNonNull(contrasena.getEditText()).getText().toString());
-
-           /* // Publicidad
-
-            AdRequest adRequest = new AdRequest.Builder().build();
-
-            //ca-app-pub-7443524707348098/1578498291
-            InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
-                    new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                            // The mInterstitialAd reference will be null until
-                            // an ad is loaded.
-                            mInterstitialAd = interstitialAd;
-                            Log.i("tag", "onAdLoaded");
-                        }
-
-                        @Override
-                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                            // Handle the error
-                            Log.i("tag", loadAdError.getMessage());
-                            mInterstitialAd = null;
-                        }
-                    });
-
-            if (mInterstitialAd != null) {
-                mInterstitialAd.show(IniciarSesionRegistroActivity.this);
-            } else {
-                Log.d("TAG", "The interstitial ad wasn't ready yet.");
-            }*/
 
         });
 

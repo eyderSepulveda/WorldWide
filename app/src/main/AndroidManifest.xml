@@ -13,16 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorldWide">
         <activity
+            android:name=".controlador.PerfilUsuarioActivity"
+            android:exported="false" />
+        <activity
             android:name=".controlador.TransicionActivity"
             android:exported="false" />
         <activity
             android:name=".controlador.OlvidoContrasenaActivity"
             android:exported="false"
-            android:parentActivityName=".controlador.IniciarSesionRegistroActivity"/>
+            android:parentActivityName=".controlador.IniciarSesionRegistroActivity" />
         <activity
             android:name=".controlador.ResultadoLugarActivity"
             android:exported="false"
-            android:parentActivityName=".controlador.ContinenteActivity"/>
+            android:parentActivityName=".controlador.ContinenteActivity" />
         <activity
             android:name=".controlador.ContinenteActivity"
             android:exported="false"
@@ -50,9 +53,7 @@
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-        <!-- publicidad - anuncios -->
+            android:resource="@array/preloaded_fonts" /> <!-- publicidad - anuncios -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7443524707348098~4941074521" />
