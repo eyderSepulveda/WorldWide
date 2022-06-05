@@ -62,7 +62,7 @@
             android:value="ca-app-pub-7443524707348098~4941074521" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA9b8DMWTSr10w1BzXkowgx51uVA2uYziI" />
+            android:value="${MAPS_API_KEY}" />
     </application>
 
 </manifest>
