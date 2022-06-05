@@ -11,6 +11,8 @@ public class Lugar {
     private String transporte;
     private String descripcion;
     private String imagen;
+    private String latitud;
+    private String longitud;
 
     public String getImagen() {
         return imagen;
@@ -90,5 +92,21 @@ public class Lugar {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 }

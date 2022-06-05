@@ -48,4 +48,6 @@ dependencies {
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.19"
     //Para publicidad
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    //Para geolocalizacion
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 }

@@ -98,6 +98,10 @@ public class ResultadoLugarActivity extends AppCompatActivity {
                             lugar.setImagen(Objects.requireNonNull(document.getData().get("imagen")).toString());
                             lugar.setDescripcion(Objects.requireNonNull(document.getData().get("descripcion")).toString());
                             lugar.setTransporte(Objects.requireNonNull(document.getData().get("transporte")).toString());
+                            lugar.setLatitud(Objects.requireNonNull(document.getData().get("latitud")).toString());
+                            lugar.setLongitud(Objects.requireNonNull(document.getData().get("longitud")).toString());
+
+
 
                             lista.add(lugar);
                             Log.d(TAG, document.getId() + " => " + document.getData());

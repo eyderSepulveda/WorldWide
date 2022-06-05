@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorldWide">
         <activity
+            android:name=".controlador.MapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".controlador.PerfilUsuarioActivity"
             android:exported="false" />
         <activity
@@ -57,6 +60,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7443524707348098~4941074521" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA9b8DMWTSr10w1BzXkowgx51uVA2uYziI" />
     </application>
 
 </manifest>

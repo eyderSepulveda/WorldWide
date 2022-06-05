@@ -90,6 +90,15 @@
                         android:textSize="14sp"
                         android:textStyle="italic" />
 
+                    <ImageButton
+                        android:id="@+id/verMapa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:minHeight="48dp"
+                        android:background="#F5F5F5"
+                        android:src="@drawable/location_24"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
             </RelativeLayout>

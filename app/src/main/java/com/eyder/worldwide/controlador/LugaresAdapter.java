@@ -1,5 +1,6 @@
 package com.eyder.worldwide.controlador;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -52,6 +53,8 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
         holder.descripcion.setText(descripcion);
         holder.transporte.setText(transporte);
 
+        int pos=position;
+
         holder.arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +85,20 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
             }
         });
 
+        holder.verMapa.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(view.getContext().getApplicationContext(), MapsActivity.class);
+                        i.putExtra("longitude",lugarModelList.get(pos).getLongitud());
+                        i.putExtra("latitude",lugarModelList.get(pos).getLatitud());
+                        i.putExtra("nombre",lugarModelList.get(pos).getNombre());
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view.getContext().getApplicationContext().startActivity(i);
+                    }
+                }
+        );
+
     }
 
     @Override
@@ -92,7 +109,7 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name, fechaVisita, descripcion, transporte;
         private ImageView imagen;
-        private ImageButton arrow;
+        private ImageButton arrow, verMapa;
         private LinearLayout hiddenView;
         private CardView cardView;
 
@@ -107,6 +124,7 @@ public class LugaresAdapter extends RecyclerView.Adapter<LugaresAdapter.ViewHold
             hiddenView = v.findViewById(R.id.hidden_view);
             cardView = v.findViewById(R.id.base_cardview);
             transporte = v.findViewById(R.id.transporte);
+            verMapa = v.findViewById(R.id.verMapa);
         }
     }
 
